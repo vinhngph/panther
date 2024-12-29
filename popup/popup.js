@@ -13,7 +13,7 @@ document.getElementById("btn-refesh").addEventListener("click", async () => {
         if (deleteDomainCookies(domain)) {
             document.getElementById("output").textContent = "Successful";
 
-            chrome.tabs.reload(tab.id, { bypassCache: true });
+            chrome.tabs.reload(tab.id);
         } else {
             document.getElementById("output").textContent = "Error";
         }
