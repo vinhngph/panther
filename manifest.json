@@ -1,0 +1,44 @@
+{
+    "name": "Panther",
+    "description": "Powerful tool",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "icons": {
+        "16": "./assets/icon/icon16.png",
+        "32": "./assets/icon/icon32.png",
+        "48": "./assets/icon/icon48.png",
+        "128": "./assets/icon/icon128.png"
+    },
+    "host_permissions": [
+        "*://www.studocu.vn/*",
+        "*://www.studocu.com/*"
+    ],
+    "permissions": [
+        "activeTab",
+        "cookies",
+        "scripting"
+    ],
+    "action": {
+        "default_popup": "./popup/popup.html",
+        "default_icon": {
+            "16": "./assets/icon/icon16.png",
+            "32": "./assets/icon/icon32.png",
+            "48": "./assets/icon/icon48.png",
+            "128": "./assets/icon/icon128.png"
+        }
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "css": [
+                "./styles/content.css"
+            ],
+            "matches": [
+                "*://www.studocu.vn/*",
+                "*://www.studocu.com/*"
+            ]
+        }
+    ]
+}
