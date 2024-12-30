@@ -10,8 +10,10 @@
         "128": "./assets/icon/icon128.png"
     },
     "host_permissions": [
-        "*://www.studocu.vn/*",
-        "*://www.studocu.com/*"
+        "*://*.studocu.com/*",
+        "*://*.studocu.vn/*",
+        "*://.studocu.com/*",
+        "*://.studocu.vn/*"
     ],
     "permissions": [
         "activeTab",
@@ -27,17 +29,14 @@
             "128": "./assets/icon/icon128.png"
         }
     },
-    "background": {
-        "service_worker": "background.js"
-    },
     "content_scripts": [
         {
             "css": [
                 "./styles/content.css"
             ],
             "matches": [
-                "*://www.studocu.vn/*",
-                "*://www.studocu.com/*"
+                "*://*.studocu.vn/*",
+                "*://*.studocu.com/*"
             ]
         }
     ]
