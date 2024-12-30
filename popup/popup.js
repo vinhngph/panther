@@ -1,4 +1,4 @@
-document.getElementById("btn-refesh").addEventListener("click", async () => {
+document.getElementById("btn-refresh").addEventListener("click", async () => {
     try {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
@@ -10,13 +10,24 @@ document.getElementById("btn-refesh").addEventListener("click", async () => {
         const allowedDomains = ["www.studocu.com", "www.studocu.vn"];
         if (!allowedDomains.includes(domain)) return;
 
-        if (deleteDomainCookies(domain)) {
-            document.getElementById("output").textContent = "Successful";
-
-            chrome.tabs.reload(tab.id);
-        } else {
-            document.getElementById("output").textContent = "Error";
-        }
+        chrome.scripting.executeScript(
+            {
+                target: { tabId: tab.id },
+                func: () => !!document.querySelector("._95f5f1767857")
+            },
+            (results) => {
+                const flag = results[0]?.result;
+                if (flag) {
+                    if (deleteDomainCookies(domain)) {
+                        chrome.tabs.reload(tab.id);
+                    } else {
+                        alert("There are some errors!");
+                    }
+                } else {
+                    alert("Nothing to clear!");
+                }
+            }
+        )
     } catch (error) {
         console.error(error);
     }
@@ -34,7 +45,20 @@ document.getElementById("btn-download").addEventListener("click", async () => {
         const allowedDomains = ["www.studocu.com", "www.studocu.vn"];
         if (!allowedDomains.includes(domain)) return;
 
-        chrome.runtime.sendMessage({ action: "download_content", tab })
+        chrome.scripting.executeScript(
+            {
+                target: { tabId: tab.id },
+                func: () => !!document.querySelector("._95f5f1767857")
+            },
+            (results) => {
+                const flag = results[0]?.result;
+                if (flag) {
+                    alert("Please use \"Refresh\" function to clear all banners!");
+                } else {
+                    chrome.runtime.sendMessage({ action: "download_content", tab })
+                }
+            }
+        )
     } catch (error) {
         console.error(error);
     }
