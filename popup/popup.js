@@ -11,7 +11,7 @@ function getBaseDomain(hostname) {
 
 function generateDocument() {
     function docView() {
-        const head = document.querySelector('link[rel="stylesheet"][href*="doc-assets.studocu.com"]').outerHTML;
+        const head = document.querySelector('link[rel="stylesheet"][href*="doc-assets"][href*=".studocu.com"]').outerHTML;
         const tit = document.getElementsByTagName("h1")[0].innerHTML;
 
         let content = document.getElementById('page-container');
