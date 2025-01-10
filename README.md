@@ -86,3 +86,8 @@ We welcome contributions from the community! 🎉
 2. Create a new branch:
    ```bash
    git checkout -b feature/new-feature
+
+---
+
+## License
+This project is licensed under the MIT License.
