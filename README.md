@@ -66,7 +66,7 @@ Panther is a Chrome extension designed to help users efficiently view and downlo
 ### Frequently Asked Questions
 
 **1. Is this extension free?**  
-Yes, Studocu Downloader is completely free to use.
+Yes, Panther | Studocu Tool is completely free to use.
 
 **2. I can't download certain documents. What should I do?**  
 Make sure you can access to the document. If the issue persists, please report a bug.
