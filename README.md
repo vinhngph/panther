@@ -1,8 +1,13 @@
 # Panther - Chrome Extension 🚀
 
+---
+
+[![Chrome Web Store](https://developer.chrome.com/static/docs/webstore/branding/image/mPGKYBIR2uCP0ApchDXE.png)](https://chrome.google.com/webstore/detail/kkhlnlepikoibfdhoenmlnmfdklofehf)
+
+---
+
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Version](https://img.shields.io/badge/version-1.0.4-brightgreen.svg)
-![Chrome Web Store](https://img.shields.io/badge/available-chrome%20web%20store-green.svg)
 
 > **Quickly view and download documents from Studocu with ease!**
 
