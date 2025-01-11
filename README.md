@@ -7,7 +7,9 @@
 
 ---
 
-[![Chrome Web Store](https://developer.chrome.com/static/docs/webstore/branding/image/UV4C4ybeBTsZt43U4xis.png)](https://chrome.google.com/webstore/detail/kkhlnlepikoibfdhoenmlnmfdklofehf)
+<p align="center">
+    <a href="https://chrome.google.com/webstore/detail/kkhlnlepikoibfdhoenmlnmfdklofehf"><img src="https://developer.chrome.com/static/docs/webstore/branding/image/UV4C4ybeBTsZt43U4xis.png" alt="Get Panther for Chrome"></a>
+</p>
 
 ---
 
