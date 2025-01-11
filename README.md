@@ -1,9 +1,9 @@
-<div align="center">
-  <h1>
-    <img src="src/assets/icon/icon16.png" alt="Panther" width="50" style="vertical-align:middle;"> 
+<h1 align="center">
+    <sub>
+        <img src="./src/assets/icon/icon128.png" alt="Panther" height="38" width="38">
+    </sub>
     Panther
-  </h1>
-</div>
+</h1>
 
 ---
 
