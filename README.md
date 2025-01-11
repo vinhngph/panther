@@ -2,7 +2,7 @@
 
 ---
 
-[![Chrome Web Store](https://developer.chrome.com/static/docs/webstore/branding/image/mPGKYBIR2uCP0ApchDXE.png)](https://chrome.google.com/webstore/detail/kkhlnlepikoibfdhoenmlnmfdklofehf)
+[![Chrome Web Store](https://developer.chrome.com/static/docs/webstore/branding/image/mPGKYBIR2uCP0ApchDXE.png)](https://developer.chrome.com/static/docs/webstore/branding/image/UV4C4ybeBTsZt43U4xis.png)
 
 ---
 
