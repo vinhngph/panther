@@ -1,13 +1,13 @@
 {
     "name": "Panther | Studocu Tool",
     "description": "View and download Studocu's documents without account.",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "manifest_version": 3,
     "icons": {
-        "16": "./assets/icon/icon16.png",
-        "32": "./assets/icon/icon32.png",
-        "48": "./assets/icon/icon48.png",
-        "128": "./assets/icon/icon128.png"
+        "16": "./src/assets/icon/icon16.png",
+        "32": "./src/assets/icon/icon32.png",
+        "48": "./src/assets/icon/icon48.png",
+        "128": "./src/assets/icon/icon128.png"
     },
     "host_permissions": [
         "*://*.studocu.com/*",
@@ -20,19 +20,23 @@
         "cookies",
         "scripting"
     ],
+    "background": {
+        "service_worker": "./src/background.js",
+        "type": "module"
+    },
     "action": {
-        "default_popup": "./popup/popup.html",
+        "default_popup": "./src/popup/popup.html",
         "default_icon": {
-            "16": "./assets/icon/icon16.png",
-            "32": "./assets/icon/icon32.png",
-            "48": "./assets/icon/icon48.png",
-            "128": "./assets/icon/icon128.png"
+            "16": "./src/assets/icon/icon16.png",
+            "32": "./src/assets/icon/icon32.png",
+            "48": "./src/assets/icon/icon48.png",
+            "128": "./src/assets/icon/icon128.png"
         }
     },
     "content_scripts": [
         {
             "css": [
-                "./styles/content.css"
+                "./src/assets/styles/content.css"
             ],
             "matches": [
                 "*://*.studocu.vn/*",
