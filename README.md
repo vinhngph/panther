@@ -54,7 +54,7 @@ Panther is a Chrome extension designed to help users efficiently view and downlo
 
 ### How to Use the Extension:
 
-1. Download this extension by your way.
+1. Download and install this extension by your way.
 2. Enjoy 🤩.
 
 ---
