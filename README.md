@@ -1,4 +1,9 @@
-# Panther - Chrome Extension 🚀
+<div align="center">
+  <h1>
+    <img src="src/assets/icon/icon128.png" alt="Panther" width="50" style="vertical-align:middle;"> 
+    Panther
+  </h1>
+</div>
 
 ---
 
