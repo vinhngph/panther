@@ -11,9 +11,7 @@
     },
     "host_permissions": [
         "*://*.studocu.com/*",
-        "*://*.studocu.vn/*",
-        "*://.studocu.com/*",
-        "*://.studocu.vn/*"
+        "*://*.studocu.vn/*"
     ],
     "permissions": [
         "activeTab",
