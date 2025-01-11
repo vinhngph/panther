@@ -1,7 +1,7 @@
 # Panther - Chrome Extension 🚀
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-1.0.2-brightgreen.svg)
+![Version](https://img.shields.io/badge/version-1.0.4-brightgreen.svg)
 ![Chrome Web Store](https://img.shields.io/badge/available-chrome%20web%20store-green.svg)
 
 > **Quickly view and download documents from Studocu with ease!**
@@ -54,10 +54,8 @@ Panther is a Chrome extension designed to help users efficiently view and downlo
 
 ### How to Use the Extension:
 
-1. Navigate to a Studocu document you want to view or download.
-2. Click the **Panther | Studocu Tool** icon in the browser toolbar.
-3. Choose **"Refresh"** or **"Download"**.
-4. Enjoy your document! 🎉
+1. Download this extension by your way.
+2. Enjoy 🤩.
 
 ---
 
