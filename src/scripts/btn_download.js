@@ -6,6 +6,8 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
             target: { tabId },
             func: () => {
                 const btn = document.querySelector("#viewer-wrapper > div > div > div:nth-child(1) > div:nth-child(1) > button");
+                if (!btn) return;
+
                 btn.onclick = null;
                 btn.addEventListener("click", (e) => {
                     e.stopPropagation();
