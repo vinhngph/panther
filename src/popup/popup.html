@@ -8,22 +8,44 @@
     <link rel="stylesheet" href="../assets/bootstrap/bootstrap.min.css">
     <style>
         body {
-            min-width: 200px;
+            min-width: 300px;
         }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            padding: 10px;
+        .header img {
+            height: 28px;
+            width: 28px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <button id="btn-download" class="btn btn-outline-info">Download</button>
-    </div>
+    <header class="header text-center py-3 bg-dark text-light">
+        <div class="d-flex justify-content-center align-items-center gap-2">
+            <img src="../assets/icon/icon128.png" alt="Panther">
+            <h1 class="h3 mb-0">Panther</h1>
+        </div>
+    </header>
+
+    <section class="news container mb-2">
+        <h3 class="text-warning text-start">News</h3>
+        <ul class="list-group list-group-numbered">
+            <li class="list-group-item">Embedded "Refresh" feature to improve the user experience.</li>
+            <li class="list-group-item">You can directly use <img src="image.png" alt="feature icon" height="30px"> on
+                Studocu.</li>
+        </ul>
+    </section>
+
+    <main class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-6 col-md-4">
+                <button id="btn-download" class="btn btn-success btn-lg w-100">Download</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center mt-2 mb-2 fw-light">
+        <small>&copy; 2025 Panther. All rights reserved.</small>
+    </footer>
 
     <script src="popup.js"></script>
 </body>
