@@ -1,7 +1,7 @@
 {
     "name": "Panther | Studocu Tool",
     "description": "View and download Studocu's documents without account.",
-    "version": "1.0.4.3",
+    "version": "1.1.0",
     "manifest_version": 3,
     "icons": {
         "16": "./src/assets/icon/icon16.png",
@@ -16,7 +16,8 @@
     "permissions": [
         "activeTab",
         "cookies",
-        "scripting"
+        "scripting",
+        "webNavigation"
     ],
     "background": {
         "service_worker": "./src/background.js",

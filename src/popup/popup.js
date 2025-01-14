@@ -1,55 +1,117 @@
-function generateDocument() {
-    function docView() {
-        const head = document.querySelector('link[rel="stylesheet"][href*="doc-assets"][href*=".studocu.com"]').outerHTML;
-        const tit = document.getElementsByTagName("h1")[0].innerHTML;
+async function genDoc() {
+    if (!document.querySelector("._95f5f1767857")) {
+        const genPDF = () => {
+            const docSize = document.getElementById("page-container-wrapper")?.childNodes[0].childNodes[0];
+            if (!docSize) return;
 
-        let content = document.getElementById('page-container');
-        content.querySelectorAll('[class*="banner-wrapper"]').forEach(element => {
-            element.remove();
-        })
-        let pages = content.childNodes;
+            const print_opt = docSize.offsetWidth > docSize.offsetHeight ? "{@page { size: A5 landscape; margin: 0; }}" : "{@page { size: A5 portrait; margin: 0; }}"
 
-        for (i = 0; i < pages.length; i++) {
-            pages[i].childNodes[0].style = "display: block;";
+            const docStyles = document.querySelector('link[rel="stylesheet"][href*="doc-assets"][href*=".studocu.com"]').outerHTML;
+
+            const doc = document.getElementById("page-container-wrapper")?.cloneNode(true);
+            if (!doc) return;
+            doc.style = null;
+            doc.querySelectorAll('[class*="banner-wrapper"]').forEach(element => {
+                if (!element) return;
+                element.remove();
+            })
+            doc.childNodes[0].childNodes.forEach((element) => {
+                element.childNodes[0].style = "display: block";
+            })
+
+            const docHead = docStyles + "<style> @media print " + print_opt + "</style>";
+            const docTitle = document.title;
+            const docBody = doc.outerHTML;
+            const docHTML = `<!DOCTYPE html><html lang="en"><title>${docTitle}</title>${docHead}</head><body>${docBody}</body></html>`
+
+            const hideFrame = document.createElement("iframe");
+            hideFrame.style.display = "none";
+            hideFrame.onload = () => {
+                const closePrint = () => {
+                    document.body.removeChild(hideFrame);
+                }
+                hideFrame.contentWindow.onbeforeunload = closePrint;
+                hideFrame.contentWindow.onafterprint = closePrint;
+                hideFrame.contentWindow.print();
+            };
+            hideFrame.srcdoc = docHTML;
+            document.body.appendChild(hideFrame);
         }
 
-        const pdf = pages[0].parentNode.parentNode.parentNode.innerHTML;
+        const loadContent = async () => {
+            const pageContainer = document.getElementById("page-container");
 
-        const print_opt = pages[0].offsetWidth > pages[0].offsetHeight ? "{@page { size: A5 landscape; margin: 0; }}" : "{@page { size: A5 portrait; margin: 0; }}"
-
-        let newWindow = window.open("", "_blank");
-        newWindow.document.getElementsByTagName("head")[0].innerHTML = `<meta charset="UTF-8">` + `<meta name="viewport" content="width=device-width, initial-scale=1.0">` + head + "<style> @media print " + print_opt + "</style>";
-        newWindow.document.title = tit;
-        newWindow.document.getElementsByTagName("body")[0].innerHTML = pdf;
-        newWindow.document.getElementsByTagName("body")[0].childNodes[0].style = "";
-        newWindow.document.close();
-
-        setTimeout(() => {
-            const e = newWindow.document.getElementById("page-container");
-            if (e) {
-                e.scrollTo({
-                    top: e.scrollHeight,
-                    behavior: "smooth",
-                });
+            if (!pageContainer) {
+                throw new Error("Page container element not found");
             }
 
-            setTimeout(() => {
-                newWindow.print();
-            }, 1500);
-        }, 1000);
-    }
+            const elements = Array.from(pageContainer.childNodes);
 
-    const documentWrapper = document.getElementById("document-wrapper");
-    if (documentWrapper) {
-        documentWrapper.scrollTo({
-            top: documentWrapper.scrollHeight,
-            behavior: "smooth",
-        });
-    }
+            const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-    setTimeout(function () {
-        docView();
-    }, 5000);
+            for (const element of elements) {
+                try {
+                    const content = element.childNodes[0];
+                    if (content?.className === "page-content" && content.childNodes.length !== 2) {
+                        element.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                        let attempts = 0;
+                        const maxAttempts = 10;
+
+                        while (content.childNodes.length !== 2 && attempts < maxAttempts) {
+                            await wait(500);
+                            attempts++;
+                        }
+
+                        if (attempts >= maxAttempts) {
+                            console.warn("Content loading timeout");
+                        }
+                    }
+                } catch (error) {
+                    console.error("Error processing element:", error);
+                }
+            }
+        };
+
+        const checkContent = () => {
+            let a = [];
+            const pageContainer = document.getElementById("page-container").childNodes;
+            for (const e of pageContainer) {
+                if (e.childNodes[0].className === "page-content" && e.childNodes[0].childNodes.length !== 2) {
+                    a.push(e);
+                }
+            }
+            if (a.length === 0) return true;
+            return false;
+        }
+
+        if (checkContent()) {
+            genPDF();
+        } else {
+            if (!confirm("We will scan this document for printing!")) return;
+
+            const doc = document.getElementById("document-wrapper");
+            if (!doc) return;
+            const currentPosition = doc.scrollTop;
+
+            try {
+                await loadContent();
+            } catch (error) {
+                console.error("Failed to load content");
+            } finally {
+                doc.scrollTo({
+                    top: currentPosition,
+                    behavior: "smooth"
+                })
+                genDoc();
+            }
+        }
+    } else {
+        return alert("Please reload this page to clear all banners!");
+    }
 }
 
 document.getElementById("btn-download").addEventListener("click", async () => {
@@ -64,23 +126,10 @@ document.getElementById("btn-download").addEventListener("click", async () => {
         const allowedDomains = ["www.studocu.com", "www.studocu.vn"];
         if (!allowedDomains.includes(domain)) return;
 
-        chrome.scripting.executeScript(
-            {
-                target: { tabId: tab.id },
-                func: () => !!document.querySelector("._95f5f1767857")
-            },
-            (results) => {
-                const flag = results[0]?.result;
-                if (flag) {
-                    alert("Please reload this page to clear all banners!");
-                } else {
-                    chrome.scripting.executeScript({
-                        target: { tabId: tab.id },
-                        func: generateDocument
-                    })
-                }
-            }
-        )
+        chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            func: genDoc
+        })
     } catch (error) {
         console.error(error);
     }
