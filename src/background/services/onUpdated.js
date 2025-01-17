@@ -2,6 +2,8 @@ const processedTabs = new Set();
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     if (changeInfo.status === "complete" && tab.url) {
+        if (!tab.url.includes(".studocu.")) return;
+
         if (!processedTabs.has(tabId)) {
             processedTabs.add(tabId);
 
