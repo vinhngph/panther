@@ -1,9 +1,33 @@
-chrome.webNavigation.onCompleted.addListener((details) => {
-    chrome.scripting.executeScript({
-        target: { tabId: details.tabId },
-        func: main
-    })
-}, { url: [{ hostEquals: "www.studocu.com", schemes: ["https"] }, { hostEquals: "www.studocu.vn", schemes: ["https"] }] })
+const processedTabs = new Set();
+
+chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+    if (changeInfo.status === "complete" && tab.url) {
+        if (!processedTabs.has(tabId)) {
+            processedTabs.add(tabId);
+
+
+            const origin = new URL(tab.url).origin;
+            chrome.cookies.get({ name: "sd_docs", url: origin }, (cookie) => {
+                if (!cookie) return;
+
+                chrome.cookies.remove({
+                    url: `http${cookie.secure ? 's' : ''}://${cookie.domain}${cookie.path}`,
+                    name: cookie.name,
+                    storeId: cookie.storeId
+                })
+            })
+            await chrome.scripting.executeScript({
+                target: { tabId },
+                func: main
+            });
+
+
+            setTimeout(() => {
+                processedTabs.delete(tabId);
+            }, 1000);
+        }
+    }
+});
 
 const main = async () => {
     const btns = [
