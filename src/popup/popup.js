@@ -91,7 +91,7 @@ async function genDoc() {
         if (checkContent()) {
             genPDF();
         } else {
-            if (!confirm(`May I scan this document to download it?\n*Please choose option "Save as PDF" to ensure the content is properly formatted.`)) return;
+            if (!confirm(`Would you like me to scan this document for download?\n\n*Please configure Destination to "Save as PDF" to ensure the content is formatted correctly.`)) return;
 
             const doc = document.getElementById("document-wrapper");
             if (!doc) return;
