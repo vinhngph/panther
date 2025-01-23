@@ -1,8 +1,8 @@
 {
   "name": "panther",
   "version": "1.0.0",
-  "description": "powerful tool",
-  "license": "ISC",
+  "description": "Access and download documents from Studocu (Studeersnel) without requiring an account.",
+  "license": "MIT",
   "author": "Nguyen Phuc Vinh",
   "type": "commonjs",
   "main": "background.js",
@@ -10,6 +10,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "chrome-types": "^0.1.327"
+    "chrome-types": "^0.1.333"
   }
 }

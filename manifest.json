@@ -1,7 +1,7 @@
 {
-    "name": "Panther | Studocu Tool",
-    "description": "View and download Studocu's documents without account.",
-    "version": "1.2.0",
+    "name": "Panther",
+    "description": "Access and download documents from Studocu (Studeersnel) without requiring an account.",
+    "version": "1.2.1",
     "manifest_version": 3,
     "icons": {
         "16": "./src/assets/icon/icon16.png",
@@ -10,8 +10,10 @@
         "128": "./src/assets/icon/icon128.png"
     },
     "host_permissions": [
-        "*://*.studocu.com/*",
-        "*://*.studocu.vn/*"
+        "https://www.studocu.com/*",
+        "https://www.studeersnel.nl/*",
+        "https://www.studocu.id/*",
+        "https://www.studocu.vn/*"
     ],
     "permissions": [
         "activeTab",
@@ -37,8 +39,10 @@
                 "./src/assets/styles/content.css"
             ],
             "matches": [
-                "*://*.studocu.vn/*",
-                "*://*.studocu.com/*"
+                "https://www.studocu.com/*",
+                "https://www.studeersnel.nl/*",
+                "https://www.studocu.id/*",
+                "https://www.studocu.vn/*"
             ]
         }
     ]

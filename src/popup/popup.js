@@ -91,7 +91,7 @@ async function genDoc() {
         if (checkContent()) {
             genPDF();
         } else {
-            if (!confirm("We will scan this document for printing!")) return;
+            if (!confirm(`May I scan this document to download it?\n*Please choose option "Save as PDF" to ensure the content is properly formatted.`)) return;
 
             const doc = document.getElementById("document-wrapper");
             if (!doc) return;
@@ -99,14 +99,13 @@ async function genDoc() {
 
             try {
                 await loadContent();
-            } catch (error) {
-                console.error("Failed to load content");
-            } finally {
                 doc.scrollTo({
                     top: currentPosition,
                     behavior: "smooth"
                 })
                 genDoc();
+            } catch (error) {
+                alert("Failed to load content");
             }
         }
     } else {
@@ -123,7 +122,12 @@ document.getElementById("btn-download").addEventListener("click", async () => {
         const url = new URL(tab.url);
         const domain = url.hostname;
 
-        const allowedDomains = ["www.studocu.com", "www.studocu.vn"];
+        const allowedDomains = [
+            "www.studocu.com",
+            "www.studeersnel.nl",
+            "www.studocu.id",
+            "www.studocu.vn"
+        ];
         if (!allowedDomains.includes(domain)) return;
 
         chrome.scripting.executeScript({

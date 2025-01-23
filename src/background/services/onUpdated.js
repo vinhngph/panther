@@ -2,13 +2,22 @@ const processedTabs = new Set();
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     if (changeInfo.status === "complete" && tab.url) {
-        if (!tab.url.includes(".studocu.")) return;
+        const url = new URL(tab.url);
+        const domain = url.hostname;
+
+        const allowedDomains = [
+            "www.studocu.com",
+            "www.studeersnel.nl",
+            "www.studocu.id",
+            "www.studocu.vn"
+        ];
+        if (!allowedDomains.includes(domain)) return;
 
         if (!processedTabs.has(tabId)) {
             processedTabs.add(tabId);
 
 
-            const origin = new URL(tab.url).origin;
+            const origin = url.origin;
             chrome.cookies.get({ name: "sd_docs", url: origin }, (cookie) => {
                 if (!cookie) return;
 
@@ -140,7 +149,7 @@ const main = async () => {
             if (checkContent()) {
                 genPDF();
             } else {
-                if (!confirm("We will scan this document for printing!")) return;
+                if (!confirm(`May I scan this document to download it?\n*Please choose option "Save as PDF" to ensure the content is properly formatted.`)) return;
 
                 const doc = document.getElementById("document-wrapper");
                 if (!doc) return;
@@ -148,14 +157,13 @@ const main = async () => {
 
                 try {
                     await loadContent();
-                } catch (error) {
-                    console.error("Failed to load content");
-                } finally {
                     doc.scrollTo({
                         top: currentPosition,
                         behavior: "smooth"
                     })
                     genDoc();
+                } catch (error) {
+                    alert("Failed to load content");
                 }
             }
         } else {
