@@ -1,4 +1,6 @@
 package-lock.json
 
 node_modules/
-versions/
+pack/
+
+test.js

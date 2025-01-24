@@ -7,7 +7,7 @@
   "type": "commonjs",
   "main": "background.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "zip -r ./pack/panther.zip src/ manifest.json LICENSE"
   },
   "dependencies": {
     "chrome-types": "^0.1.333"
