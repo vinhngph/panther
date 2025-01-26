@@ -7,7 +7,7 @@
   "type": "commonjs",
   "main": "background.js",
   "scripts": {
-    "build": "zip -r ./pack/panther.zip src/ manifest.json LICENSE"
+    "build": "rm -rf ./pack/* && zip -r ./pack/panther.zip src/ manifest.json LICENSE && unzip ./pack/panther.zip -d ./pack/panther"
   },
   "dependencies": {
     "chrome-types": "^0.1.333"
