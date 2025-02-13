@@ -62,8 +62,6 @@ const main = async () => {
 
                     try {
                         await loadContent();
-
-                        return genPDF();
                     } catch (error) {
                         alert("Failed to load content");
                     }
@@ -96,20 +94,50 @@ const main = async () => {
         const docHead = docStyles + "<style> @media print " + print_opt + "</style>";
         const docTitle = document.title;
         const docBody = doc.outerHTML;
-        const docHTML = `<!DOCTYPE html><html lang="en"><title>${docTitle}</title>${docHead}</head><body>${docBody}</body></html>`
 
-        const hideFrame = document.createElement("iframe");
-        hideFrame.style.display = "none";
-        hideFrame.onload = () => {
-            const closePrint = () => {
-                document.body.removeChild(hideFrame);
-            }
-            hideFrame.contentWindow.onbeforeunload = closePrint;
-            hideFrame.contentWindow.onafterprint = closePrint;
-            hideFrame.contentWindow.print();
-        };
-        hideFrame.srcdoc = docHTML;
-        document.body.appendChild(hideFrame);
+        const newWindow = window.open("");
+        newWindow.document.head.innerHTML = docHead;
+        newWindow.document.title = docTitle;
+        newWindow.document.body.innerHTML = docBody;
+
+        async function download_count_down(newWindow) {
+            const notification = newWindow.document.createElement('div');
+            Object.assign(notification.style, {
+                position: 'fixed',
+                top: '20px',
+                right: '20px',
+                backgroundColor: '#FF5722',
+                color: 'white',
+                padding: '15px',
+                borderRadius: '5px',
+                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                opacity: '0',
+                transition: 'opacity 0.5s ease',
+                fontSize: '20px',
+                zIndex: '9999'
+            });
+
+            let countdown = 5;
+            notification.textContent = `Download in ${countdown}...`;
+            newWindow.document.body.appendChild(notification);
+            setTimeout(() => notification.style.opacity = '1', 10);
+
+            await new Promise((resolve) => {
+                const interval = setInterval(() => {
+                    countdown--;
+                    notification.textContent = `Download in ${countdown}...`;
+                    if (countdown <= 0) {
+                        clearInterval(interval);
+                        notification.style.opacity = '0';
+                        setTimeout(() => notification.remove(), 500);
+                        resolve();
+                    }
+                }, 1000);
+            });
+
+            newWindow.print();
+        }
+        download_count_down(newWindow);
     }
 
     const loadContent = async () => {
@@ -149,10 +177,50 @@ const main = async () => {
             }
         }
 
-        doc.scrollTo({
-            top: currentPosition,
-            behavior: "smooth"
-        });
+        async function countdownAndScroll(doc, currentPosition) {
+            const notification = document.createElement('div');
+            Object.assign(notification.style, {
+                position: 'fixed',
+                top: '20px',
+                right: '20px',
+                backgroundColor: '#FF5722',
+                color: 'white',
+                padding: '15px',
+                borderRadius: '5px',
+                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                opacity: '0',
+                transition: 'opacity 0.5s ease',
+                fontSize: '20px',
+                zIndex: '9999'
+            });
+
+            let countdown = 5;
+            notification.textContent = `Open document in ${countdown}...`;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.style.opacity = '1', 10);
+
+            await new Promise((resolve) => {
+                const interval = setInterval(() => {
+                    countdown--;
+                    notification.textContent = `Open document in ${countdown}...`;
+                    if (countdown <= 0) {
+                        clearInterval(interval);
+                        notification.style.opacity = '0';
+                        setTimeout(() => notification.remove(), 500);
+                        resolve();
+                    }
+                }, 1000);
+            });
+
+            doc.scrollTo({
+                top: currentPosition,
+                behavior: "smooth"
+            });
+
+            genPDF();
+        }
+
+        countdownAndScroll(doc, currentPosition);
     };
 
     const checkContent = () => {
