@@ -48,16 +48,16 @@ async function genDoc() {
                 let countdown = 5;
                 notification.textContent = `Download in ${countdown}...`;
                 newWindow.document.body.appendChild(notification);
-                setTimeout(() => notification.style.opacity = '1', 10);
+                newWindow.setTimeout(() => notification.style.opacity = '1', 10);
 
                 await new Promise((resolve) => {
-                    const interval = setInterval(() => {
+                    const interval = newWindow.setInterval(() => {
                         countdown--;
                         notification.textContent = `Download in ${countdown}...`;
                         if (countdown <= 0) {
-                            clearInterval(interval);
+                            newWindow.clearInterval(interval);
                             notification.style.opacity = '0';
-                            setTimeout(() => notification.remove(), 500);
+                            notification.remove();
                             resolve();
                         }
                     }, 1000);
