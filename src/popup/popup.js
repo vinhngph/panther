@@ -4,7 +4,53 @@ async function genDoc() {
             const docSize = document.getElementById("page-container-wrapper")?.childNodes[0].childNodes[0];
             if (!docSize) return;
 
-            const print_opt = docSize.offsetWidth > docSize.offsetHeight ? "{@page { size: A5 landscape; margin: 0; }}" : "{@page { size: A5 portrait; margin: 0; }}"
+            const pxToMm = (px) => {
+                const div = document.createElement("div");
+                div.style.width = "100mm";
+                div.style.position = "absolute";
+                div.style.visibility = "hidden";
+                document.body.appendChild(div);
+
+                const mmPerPx = 100 / div.getBoundingClientRect().width;
+                document.body.removeChild(div);
+
+                return px * mmPerPx;
+            }
+
+            const printConfig = (width, height) => {
+                width = pxToMm(width);
+                height = pxToMm(height);
+
+                if (width < height) {
+                    const scaleX = 210 / width;
+                    const scaleY = 297 / height;
+
+                    return `{
+                        @page { 
+                            size: A4 portrait; margin: 0; 
+                        }
+                        #page-container {
+                            transform: scale(${scaleX}, ${scaleY});
+                            transform-origin: top left;
+                        }
+                    }`
+                } else {
+                    const scaleX = 297 / width;
+                    const scaleY = 210 / height;
+
+                    return `{
+                        @page { 
+                            size: A4 landscape; margin: 0; 
+                        }
+                        #page-container {
+                            transform: scale(${scaleX}, ${scaleY});
+                            transform-origin: top left;
+                        }
+                    }`
+                }
+            }
+
+            const print_opt = printConfig(docSize.clientWidth, docSize.clientHeight);
 
             const docStyles = document.querySelector('link[rel="stylesheet"][href*="doc-assets"][href*=".studocu.com"]').outerHTML;
 

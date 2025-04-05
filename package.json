@@ -1,6 +1,6 @@
 {
   "name": "panther",
-  "version": "1.0.0",
+  "version": "1.2.1.4",
   "description": "Access and download documents from Studocu (Studeersnel) without requiring an account.",
   "license": "MIT",
   "author": "Nguyen Phuc Vinh",

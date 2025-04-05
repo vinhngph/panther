@@ -14,7 +14,7 @@
 ---
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-1.0.4-brightgreen.svg)
+![Version](https://img.shields.io/badge/version-1.2.1.4-brightgreen.svg)
 
 > **Quickly view and download documents from Studocu with ease!**
 
