@@ -102,45 +102,22 @@ const main = async () => {
 
                         return px * mmPerPx;
                     }
-                    // Convert mm to px
-                    const mmToPx = (mm) => {
-                        const div = document.createElement("div");
-                        div.style.width = "100mm";
-                        div.style.position = "absolute";
-                        div.style.visibility = "hidden";
-                        document.body.appendChild(div);
-
-                        const pxPer100Mm = div.getBoundingClientRect().width;
-                        const pxPerMm = pxPer100Mm / 100;
-
-                        document.body.removeChild(div);
-
-                        return mm * pxPerMm;
-                    };
-
-                    const docWidth = pxToMm(docSize.clientWidth);
-                    const docHeight = pxToMm(docSize.clientHeight);
 
                     // portrait: true | landscape: false
-                    const docStruct = docWidth < docHeight ? "portrait" : "landscape";
+                    const docStruct = docSize.clientWidth < docSize.clientHeight ? "portrait" : "landscape";
 
-                    let docScale;
-                    let translateX;
-                    let translateY;
-
+                    const docScale = [];
                     if (docStruct == "portrait") {
-                        docScale = Math.min(210 / docWidth, 297 / docHeight);
-                        translateX = mmToPx((210 - (docWidth * docScale)) / 2);
-                        translateY = mmToPx((297 - (docHeight * docScale)) / 2);
+                        docScale.push(210 / pxToMm(docSize.clientWidth));
+                        docScale.push(297 / pxToMm(docSize.clientHeight));
                     } else {
-                        docScale = Math.min(297 / pxToMm(docSize.clientWidth), 210 / pxToMm(docSize.clientHeight));
-                        translateX = mmToPx((297 - (docWidth * docScale)) / 2);
-                        translateY = mmToPx((210 - (docHeight * docScale)) / 2);
+                        docScale.push(297 / pxToMm(docSize.clientWidth));
+                        docScale.push(210 / pxToMm(docSize.clientHeight));
                     }
 
 
                     const css = document.createElement("style");
-                    css.innerText = `@media print { @page { size: A4 ${docStruct}; margin: 0; } #page-container { transform: scale(${docScale}) translate(${translateX}px, ${translateY}px); transform-origin: top left; }}`;
+                    css.innerText = `@media print { @page { size: A4 ${docStruct}; margin: 0; } #page-container { transform: scale(${docScale[0]}, ${docScale[1]}); transform-origin: top left; }}`;
                     return css;
                 }
                 // ----------------------------------------------------------
