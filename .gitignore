@@ -2,5 +2,6 @@ package-lock.json
 
 node_modules/
 pack/
+releases/
 
 test.js
