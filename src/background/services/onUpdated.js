@@ -41,12 +41,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
 });
 
 const main = async () => {
-    const btns = [
-        document.querySelector("#viewer-wrapper > div > div > div:nth-child(1) > div:nth-child(1) > button"),
-        document.querySelector("#viewer-wrapper > div > div > section:nth-child(2) > div > div > div:nth-child(1) > div:nth-child(2) > button")
-    ];
-
-    btns.forEach((btn) => {
+    document.querySelectorAll(`[data-test-selector="document-viewer-download-button-topbar"]`).forEach((btn) => {
         if (!btn) return;
         btn.onclick = null;
         btn.addEventListener("click", async (e) => {
