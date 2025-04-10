@@ -12,7 +12,7 @@
 ---
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-1.2.1.4-brightgreen.svg)
+![Version](https://img.shields.io/badge/version-1.2.1.5-brightgreen.svg)
 
 Panther is a lightweight Chrome extension designed to improve the readability and accessibility of educational documents on supported platforms. The extension operates only on content that is already loaded in your browser and does not bypass any authentication, paywalls, or server-side restrictions.
 
