@@ -51,7 +51,7 @@ Panther does not collect, store, or transmit any personal data. All operations a
 ## Installation
 
 ### Chrome Web Store
-1. Visit the [Chrome Web Store](https://chrome.google.com/webstore/).
+1. Visit the [Chrome Web Store](https://chrome.google.com/webstore/detail/kkhlnlepikoibfdhoenmlnmfdklofehf).
 2. Search for **Panther**.
 3. Click **Add to Chrome** to install the extension.
 
