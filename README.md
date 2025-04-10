@@ -5,8 +5,6 @@
     Panther
 </h1>
 
----
-
 <p align="center">
     <a href="https://chrome.google.com/webstore/detail/kkhlnlepikoibfdhoenmlnmfdklofehf"><img src="https://developer.chrome.com/static/docs/webstore/branding/image/UV4C4ybeBTsZt43U4xis.png" alt="Get Panther for Chrome"></a>
 </p>
@@ -16,88 +14,75 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Version](https://img.shields.io/badge/version-1.2.1.4-brightgreen.svg)
 
-> **Quickly view and download documents from Studocu with ease!**
-
-Panther is a Chrome extension designed to help users efficiently view and download documents from Studocu. Simplify your workflow and save time with this intuitive and fast tool.
+Panther is a lightweight Chrome extension designed to improve the readability and accessibility of educational documents on supported platforms. The extension operates only on content that is already loaded in your browser and does not bypass any authentication, paywalls, or server-side restrictions.
 
 ---
 
-## Table of Contents
-
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [FAQ](#faq)
-- [Contributing](#contributing)
-- [License](#license)
+## 🚀 Features
+- **Clean Viewing Experience:** Removes distracting overlays and visual obstructions from visible content.
+- **Enhanced Readability:** Improves text formatting for easier reading and text selection.
+- **Local Operation:** Works entirely on content already present on the page—no external data fetching or server-side access.
 
 ---
 
-## Features
+## 🧠 Use Cases
+- **Improved Study Experience:** Enhance your reading experience for online study materials.
+- **Offline Reference:** Save the content visible on your browser for personal offline use.
+- **Accessibility:** Make documents easier to read without modifying protected or restricted content.
 
-- 📖 **View documents effortlessly**: Display document content directly in your browser.
-- 📥 **Download files in one click**: Save documents as PDFs instantly.
-- 🔍 **Optimized for Studocu users**: Simple and user-friendly interface.
-- 🚀 **Fast performance**: Minimize the time spent loading and downloading files.
+---
+
+## ⚖️ Legal Notice & Disclaimer
+
+**Important:**
+
+- **Independent Project:** Panther is an independent, community-driven project and is not affiliated with, endorsed by, or sponsored by any specific educational platform.
+- **Limited Scope:** The extension only modifies the presentation of content that is already loaded in your browser. It does not bypass any authentication, paywalls, or any form of server-side protection.
+- **User Responsibility:** Users must comply with the terms of service of the platforms they use. This tool is intended solely for educational and personal purposes.
+- **No Warranty:** This project is provided "as is" without any warranties. Use it at your own risk.
+
+---
+
+## 🔒 Privacy
+Panther does not collect, store, or transmit any personal data. All operations are performed locally within your browser.
 
 ---
 
 ## Installation
 
-### How to Install the Extension:
+### Chrome Web Store
+1. Visit the [Chrome Web Store](https://chrome.google.com/webstore/).
+2. Search for **Panther**.
+3. Click **Add to Chrome** to install the extension.
 
-1. **From Chrome Web Store**:
-   - Visit the [Chrome Web Store](https://chrome.google.com/webstore/detail/kkhlnlepikoibfdhoenmlnmfdklofehf).
-   - Search for `Panther | Studocu Tool`.
-   - Click **Add to Chrome** to install.
-
-2. **Manual Installation (for developers)**:
-   - Clone the project:
-     ```bash
-     git clone https://github.com/vinhngph/panther.git
-     ```
-   - Open **chrome://extensions** in Chrome.
-   - Enable **Developer mode**.
-   - Click **Load unpacked** and select the folder containing the source code.
-
----
-
-## Usage
-
-### How to Use the Extension:
-
-1. Download and install this extension by your way.
-2. Enjoy 🤩.
+### Manual Installation (for Developers)
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/vinhngph/panther.git
+   ```
+2. Open `chrome://extensions` in your Chrome browser.
+3. Enable **Developer Mode**.
+4. Click **Load unpacked** and select the folder containing the source code.
 
 ---
 
 ## FAQ
 
-### Frequently Asked Questions
+**Q: Is this extension free?**  
+A: Yes, Panther is completely free for personal, educational, and non-commercial use.
 
-**1. Is this extension free?**  
-Yes, Panther | Studocu Tool is completely free to use.
+**Q: Can Panther be used to access restricted content?**  
+A: No. Panther only enhances the display of content already visible in your browser and does not bypass any access restrictions.
 
-**2. I can't download certain documents. What should I do?**  
-Make sure you can access to the document. If the issue persists, please report a bug.
-
-**3. Is this extension safe?**  
-Absolutely. We do not collect or store any user data.
+**Q: Does Panther collect any personal data?**  
+A: No, this extension does not collect or store any personal data.
 
 ---
 
 ## Contributing
-
-We welcome contributions from the community! 🎉
-
-### How to Contribute:
-
-1. Fork this repository.
-2. Create a new branch:
-   ```bash
-   git checkout -b feature/new-feature
+We welcome contributions from the community! If you have suggestions or improvements, please feel free to fork the repository and submit a pull request. For major changes, please open an issue first to discuss what you would like to change.
 
 ---
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the MIT License for non-commercial, personal, and educational use. If you are unsure about the legality of your use case, please consult the relevant platform policies or seek legal advice.

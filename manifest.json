@@ -1,7 +1,7 @@
 {
-    "name": "Panther - Studocu Unlocker",
-    "description": "Access and download documents from Studocu (Studeersnel) without requiring an account.",
-    "version": "1.2.1.4",
+    "name": "Panther",
+    "description": "Enhance your document viewing experience with clean formatting and simplified layout for supported educational websites.",
+    "version": "1.2.1.5",
     "manifest_version": 3,
     "icons": {
         "16": "./src/assets/icon/icon16.png",
