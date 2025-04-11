@@ -273,7 +273,10 @@ const main = async () => {
                 // Generate document
                 // ----------------------------------------------------------
                 const genDoc = async () => {
-                    const docStyles = document.querySelector('link[rel="stylesheet"][href*="doc-assets"][href*=".studocu.com"]').cloneNode(true);
+                    const docStyles = (
+                        document.querySelector('link[rel="stylesheet"][href*="doc-assets"][href*=".studocu.com"]') ||
+                        document.querySelector('link[as="style"][href*="doc-assets"][href*=".studocu.com"]')
+                    )?.cloneNode(true);
 
                     const newWindow = window.open("");
                     newWindow.document.title = document.title;
