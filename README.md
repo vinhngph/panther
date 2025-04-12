@@ -1,18 +1,19 @@
+![GitHub License](https://img.shields.io/github/license/vinhngph/panther)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/t/vinhngph/panther)
+![Chrome Web Store Rating](https://img.shields.io/chrome-web-store/rating/kkhlnlepikoibfdhoenmlnmfdklofehf?label=chrome%20rating)
+![GitHub Release](https://img.shields.io/github/v/release/vinhngph/panther)
+---
 <h1 align="center">
     <sub>
         <img src="./src/assets/icon/icon128.png" alt="Panther" height="38" width="38">
     </sub>
     Panther
 </h1>
-
 <p align="center">
     <a href="https://chrome.google.com/webstore/detail/kkhlnlepikoibfdhoenmlnmfdklofehf"><img src="https://developer.chrome.com/static/docs/webstore/branding/image/UV4C4ybeBTsZt43U4xis.png" alt="Get Panther for Chrome"></a>
 </p>
 
 ---
-
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-1.2.1.5-brightgreen.svg)
 
 Panther is a lightweight Chrome extension designed to improve the readability and accessibility of educational documents on supported platforms. The extension operates only on content that is already loaded in your browser and does not bypass any authentication, paywalls, or server-side restrictions.
 
