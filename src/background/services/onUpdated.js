@@ -128,7 +128,7 @@ const main = async () => {
                         translateX = mmToPx((210 - (docWidth * docScale)) / 2);
                         translateY = mmToPx((297 - (docHeight * docScale)) / 2);
                     } else {
-                        docScale = Math.min(297 / pxToMm(docSize.clientWidth), 210 / pxToMm(docSize.clientHeight));
+                        docScale = Math.min(297 / docWidth, 210 / docHeight);
                         translateX = mmToPx((297 - (docWidth * docScale)) / 2);
                         translateY = mmToPx((210 - (docHeight * docScale)) / 2);
                     }
