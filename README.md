@@ -86,4 +86,4 @@ We welcome contributions from the community! If you have suggestions or improvem
 ---
 
 ## License
-This project is licensed under the MIT License for non-commercial, personal, and educational use. If you are unsure about the legality of your use case, please consult the relevant platform policies or seek legal advice.
+This project is licensed under the GPL-3.0 license for non-commercial, personal, and educational use. If you are unsure about the legality of your use case, please consult the relevant platform policies or seek legal advice.
