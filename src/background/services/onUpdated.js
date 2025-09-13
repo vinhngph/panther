@@ -41,7 +41,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
 });
 
 const main = async () => {
-    document.querySelectorAll(`[data-test-selector="document-viewer-download-button-topbar"]`).forEach((btn) => {
+    document.querySelectorAll(`[aria-label="Download"]`).forEach((btn) => {
         if (!btn) return;
         btn.onclick = null;
         btn.addEventListener("click", async (e) => {
@@ -69,6 +69,7 @@ const main = async () => {
                     });
                     doc.childNodes[0].childNodes.forEach((e) => {
                         e.childNodes[0].style = "display: block";
+                        e.childNodes[0].childNodes[0].style = "display: block;";
                     });
 
                     return doc;
@@ -81,7 +82,7 @@ const main = async () => {
                 // ----------------------------------------------------------
                 const printConfig = () => {
                     // Get document size
-                    const docSize = document.getElementById("page-container-wrapper")?.childNodes[0].childNodes[0];
+                    const docSize = document.getElementById("page-container-wrapper")?.childNodes[0]?.childNodes[0]?.childNodes[0];
                     if (!docSize) return;
 
                     // Convert px to mm

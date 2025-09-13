@@ -1,13 +1,13 @@
 {
     "name": "Panther",
     "description": "Enhance your document viewing experience with clean formatting and simplified layout for supported educational websites.",
-    "version": "1.2.1.6",
+    "version": "1.2.1.7",
     "manifest_version": 3,
     "icons": {
-        "16": "./src/assets/icon/icon16.png",
-        "32": "./src/assets/icon/icon32.png",
-        "48": "./src/assets/icon/icon48.png",
-        "128": "./src/assets/icon/icon128.png"
+        "16": "src/assets/icon/icon16.png",
+        "32": "src/assets/icon/icon32.png",
+        "48": "src/assets/icon/icon48.png",
+        "128": "src/assets/icon/icon128.png"
     },
     "host_permissions": [
         "https://www.studocu.com/*",

@@ -17,6 +17,7 @@ async function main() {
         });
         doc.childNodes[0].childNodes.forEach((e) => {
             e.childNodes[0].style = "display: block";
+            e.childNodes[0].childNodes[0].style = "display: block;";
         });
 
         return doc;
@@ -29,7 +30,7 @@ async function main() {
     // ----------------------------------------------------------
     const printConfig = () => {
         // Get document size
-        const docSize = document.getElementById("page-container-wrapper")?.childNodes[0].childNodes[0];
+        const docSize = document.getElementById("page-container-wrapper")?.childNodes[0]?.childNodes[0]?.childNodes[0];
         if (!docSize) return;
 
         // Convert px to mm
