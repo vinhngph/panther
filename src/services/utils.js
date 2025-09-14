@@ -1,3 +1,23 @@
+const waitContent = async (element) => {
+    const imgs = Array.from(element.querySelectorAll("img"))
+    const imgPromises = imgs.map(img => {
+        if (img.complete) return Promise.resolve();
+
+        return new Promise(resolve => {
+            const done = () => {
+                img.removeEventListener("load", done);
+                img.removeEventListener("error", done);
+                resolve()
+            }
+            img.addEventListener("load", done, { once: true })
+            img.addEventListener("error", done, { once: true })
+        });
+    })
+
+    await Promise.all([...imgPromises])
+    await new Promise(requestAnimationFrame)
+}
+
 const scanDocument = async () => {
     const pageContainer = document.getElementById("page-container");
     if (!pageContainer) {
@@ -10,7 +30,7 @@ const scanDocument = async () => {
         try {
             const content = element.childNodes[0]?.childNodes[0];
             element.scrollIntoView({
-                behavior: "smooth",
+                behavior: "instant",
                 block: "start",
             });
 
@@ -24,18 +44,6 @@ const scanDocument = async () => {
 
 const getCurrentPosition = () => {
     return window.scrollY;
-}
-
-const waitContent = async (element) => {
-    const imgs = Array.from(element.querySelectorAll("img"))
-    const imgPromises = imgs.map(img => {
-        if (img.complete) return Promise.resolve();
-
-        return new Promise(resolve => img.addEventListener("load", resolve));
-    })
-
-    await Promise.all([...imgPromises])
-    await new Promise(requestAnimationFrame)
 }
 
 const countdownNotification = async (doc, message) => {
@@ -120,8 +128,9 @@ const genDoc = async () => {
     newWindow.document.head.appendChild(printConfig());
     newWindow.document.body.appendChild(cloneDoc());
 
-    await countdownNotification(newWindow.document, "Download");
-    newWindow.print();
+    newWindow.requestAnimationFrame(() => {
+        newWindow.print();
+    })
 }
 
 
