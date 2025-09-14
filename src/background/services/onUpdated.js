@@ -145,7 +145,7 @@ const main = async () => {
                 // ----------------------------------------------------------
                 // Get current position
                 const getCurrentPosition = () => {
-                    return document.getElementById("document-wrapper")?.scrollTop;
+                    return window.scrollY;
                 }
                 // ----------------------------------------------------------
 
@@ -162,8 +162,8 @@ const main = async () => {
                     const elements = Array.from(pageContainer.childNodes);
                     for (const element of elements) {
                         try {
-                            const content = element.childNodes[0];
-                            if (content?.className === "page-content" && content.childNodes.length !== 2) {
+                            const content = element.childNodes[0]?.childNodes[0];
+                            if (content?.className === "page-content" && content?.childNodes?.length !== 2) {
                                 element.scrollIntoView({
                                     behavior: "smooth",
                                     block: "start",
@@ -234,9 +234,9 @@ const main = async () => {
                 // Check document is loaded or not
                 const checkContent = () => {
                     let a = [];
-                    const pageContainer = document.getElementById("page-container").childNodes;
+                    const pageContainer = document.getElementById("page-container")?.childNodes;
                     for (const e of pageContainer) {
-                        if (e.childNodes[0].className === "page-content" && e.childNodes[0].childNodes.length !== 2) {
+                        if (e?.childNodes[0]?.childNodes[0]?.className === "page-content" && e?.childNodes[0]?.childNodes[0]?.childNodes.length !== 2) {
                             a.push(e);
                         }
                     }
@@ -250,22 +250,20 @@ const main = async () => {
                 // ----------------------------------------------------------
                 const scrollToPosition = async (position) => {
                     return new Promise((resolve) => {
-                        const documentWrapper = document.getElementById("document-wrapper");
-
                         const onScroll = () => {
-                            if (documentWrapper.scrollTop === position) {
-                                documentWrapper.removeEventListener("scroll", onScroll);
+                            if (window.scrollY === position) {
+                                window.removeEventListener("scroll", onScroll);
 
                                 resolve();
                             }
                         }
 
-                        documentWrapper.scrollTo({
+                        window.scrollTo({
                             top: position,
                             behavior: "smooth"
                         });
 
-                        documentWrapper.addEventListener("scroll", onScroll);
+                        window.addEventListener("scroll", onScroll);
                     })
                 }
                 // ----------------------------------------------------------
@@ -297,10 +295,18 @@ const main = async () => {
                 // ----------------------------------------------------------
                 // Valid this document is clean.
                 // ----------------------------------------------------------
-                if (!!document.querySelectorAll(`button[data-test-selector="preview-banner-upgrade-second-cta"]`).length) {
+                const isClear = () => {
+                    let preBtns = document.querySelectorAll("button")
+
+                    let matched = Array.from(preBtns).filter(btn => {
+                        return Array.from(btn.classList).some(c => c.startsWith("PremiumBannerButton"))
+                    })
+
+                    return matched.length === 0
+                }
+                if (!isClear()) {
                     if (confirm(`Advertisement banners are detected in this document.\nClick "OK" to remove them and refresh the page.\nClick "Cancel" if you believe all banners have been removed.`)) {
-                        location.reload();
-                        return;
+                        return location.reload();
                     }
                 }
 
