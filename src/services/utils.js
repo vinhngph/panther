@@ -26,14 +26,16 @@ const scanDocument = async () => {
     }
 
     const elements = Array.from(pageContainer.childNodes);
-    for (const element of elements) {
+    const progress = progressNotification(elements.length)
+
+    for (let i = 0; i < elements.length; i++) {
         try {
-            const content = element.childNodes[0]?.childNodes[0];
-            element.scrollIntoView({
+            const content = elements[i].childNodes[0]?.childNodes[0];
+            elements[i].scrollIntoView({
                 behavior: "instant",
                 block: "start",
             });
-
+            progress.setProgress(i + 1)
             await waitContent(content);
         } catch (error) {
             alert("Error processing element:", error);
@@ -46,9 +48,8 @@ const getCurrentPosition = () => {
     return window.scrollY;
 }
 
-const countdownNotification = async (doc, message) => {
-    const notification = doc.createElement('div');
-
+const progressNotification = (total) => {
+    const notification = document.createElement('div');
     // Styling
     Object.assign(notification.style, {
         fontFamily: "sans-serif",
@@ -60,29 +61,19 @@ const countdownNotification = async (doc, message) => {
         padding: '15px',
         borderRadius: '5px',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-        opacity: '0',
+        opacity: '1',
         transition: 'opacity 0.5s ease',
         fontSize: '20px',
         zIndex: '9999'
     });
+    document.body.appendChild(notification)
 
-    let countdown = 5;
-    notification.textContent = `${message} in ${countdown}...`;
-
-    doc.body.appendChild(notification);
-    setTimeout(() => notification.style.opacity = '1', 10);
-
-    await new Promise((resolve) => {
-        const interval = setInterval(() => {
-            countdown--;
-            notification.textContent = `${message} in ${countdown}...`;
-            if (countdown <= 0) {
-                clearInterval(interval);
-                notification.remove();
-                resolve();
-            }
-        }, 1000);
-    });
+    return {
+        setProgress: (current) => {
+            if (current === total) return notification.remove()
+            notification.textContent = `Scanning: ${current}/${total}`;
+        }
+    }
 }
 
 const checkContent = () => {
