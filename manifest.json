@@ -1,7 +1,7 @@
 {
     "name": "Panther",
-    "description": "Enhance your document viewing experience with clean formatting and simplified layout for supported educational websites.",
-    "version": "1.2.1.8",
+    "description": "Enhance your experience on Studocu.",
+    "version": "1.2.1.9",
     "manifest_version": 3,
     "icons": {
         "16": "src/assets/icon/icon16.png",
@@ -9,6 +9,19 @@
         "48": "src/assets/icon/icon48.png",
         "128": "src/assets/icon/icon128.png"
     },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "src/bundle/viewer.bundle.js"
+            ],
+            "matches": [
+                "https://www.studocu.com/*",
+                "https://www.studeersnel.nl/*",
+                "https://www.studocu.id/*",
+                "https://www.studocu.vn/*"
+            ]
+        }
+    ],
     "host_permissions": [
         "https://www.studocu.com/*",
         "https://www.studeersnel.nl/*",
