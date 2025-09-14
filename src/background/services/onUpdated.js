@@ -152,6 +152,18 @@ const main = async () => {
                 // ----------------------------------------------------------
                 // Scan document
                 // ----------------------------------------------------------
+                const waitContent = async (element) => {
+                    const imgs = Array.from(element.querySelectorAll("img"))
+                    const imgPromises = imgs.map(img => {
+                        if (img.complete) return Promise.resolve();
+
+                        return new Promise(resolve => img.addEventListener("load", resolve));
+                    })
+
+                    await Promise.all([...imgPromises])
+                    await new Promise(requestAnimationFrame)
+                }
+
                 const scanDoc = async () => {
                     const pageContainer = document.getElementById("page-container");
                     if (!pageContainer) {
@@ -163,22 +175,12 @@ const main = async () => {
                     for (const element of elements) {
                         try {
                             const content = element.childNodes[0]?.childNodes[0];
-                            if (content?.className === "page-content" && content?.childNodes?.length !== 2) {
-                                element.scrollIntoView({
-                                    behavior: "smooth",
-                                    block: "start",
-                                });
+                            element.scrollIntoView({
+                                behavior: "smooth",
+                                block: "start",
+                            });
 
-                                await new Promise((resolve) => {
-                                    const observer = new MutationObserver((mutations, observerInstance) => {
-                                        if (content.childNodes.length === 2 && content.childNodes[0].childNodes.length > 0) {
-                                            observerInstance.disconnect();
-                                            resolve();
-                                        }
-                                    });
-                                    observer.observe(content, { childList: true, subtree: true });
-                                });
-                            }
+                            await waitContent(content);
                         } catch (error) {
                             alert("Error processing element:", error);
                             return;
@@ -314,7 +316,7 @@ const main = async () => {
                     // If document is not loaded yet
                     const currentPosition = getCurrentPosition();
                     await scanDoc();
-                    await countdownNotification(document, "Open document");
+                    // await countdownNotification(document, "Open document");
                     await scrollToPosition(currentPosition);
                 }
                 return genDoc()
