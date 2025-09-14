@@ -18,7 +18,7 @@ const waitContent = async (element) => {
     await new Promise(requestAnimationFrame)
 }
 
-const scanDocument = async () => {
+export async function scanDocument() {
     const pageContainer = document.getElementById("page-container");
     if (!pageContainer) {
         alert("Page container element not found");
@@ -119,9 +119,9 @@ const genDoc = async () => {
     newWindow.document.head.appendChild(printConfig());
     newWindow.document.body.appendChild(cloneDoc());
 
-    newWindow.requestAnimationFrame(() => {
-        newWindow.print();
-    })
+    const script = newWindow.document.createElement("script")
+    script.src = chrome.runtime.getURL("src/bundle/viewer.bundle.js")
+    newWindow.document.body.appendChild(script)
 }
 
 

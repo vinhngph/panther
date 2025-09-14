@@ -9,6 +9,19 @@
         "48": "src/assets/icon/icon48.png",
         "128": "src/assets/icon/icon128.png"
     },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "src/bundle/viewer.bundle.js"
+            ],
+            "matches": [
+                "https://www.studocu.com/*",
+                "https://www.studeersnel.nl/*",
+                "https://www.studocu.id/*",
+                "https://www.studocu.vn/*"
+            ]
+        }
+    ],
     "host_permissions": [
         "https://www.studocu.com/*",
         "https://www.studeersnel.nl/*",

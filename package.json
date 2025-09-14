@@ -7,8 +7,8 @@
   "type": "commonjs",
   "main": "background.js",
   "scripts": {
-    "bundle": "vite build --mode download && vite build --mode popup",
-    "build": "npm run bundle && rm -rf ./pack/* && zip -r ./pack/panther.zip src/ manifest.json LICENSE && unzip ./pack/panther.zip -d ./pack/panther"
+    "bundle": "vite build --mode download && vite build --mode popup && vite build --mode viewer",
+    "build": "npm run bundle && rm -rf ./pack/* && VERSION=$(node -p \"require('./manifest.json').version\") && zip -r ./pack/panther_v$VERSION.zip src/ manifest.json LICENSE -x src/services/* && unzip ./pack/panther_v$VERSION.zip -d ./pack/panther"
   },
   "dependencies": {
     "chrome-types": "^0.1.375"
