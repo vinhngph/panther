@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
+</head>
+
+<body style="background: transparent;">
+    <div class="modal d-block" tabindex="-1" data-bs-theme="dark">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="text-center w-100 fs-5 fw-bold">Choose paper size</span>
+                </div>
+
+                <div class="modal-body">
+                    <select id="paper-size" class="form-select">
+                        <option value="A5.148.210">A5 (148x210 mm)</option>
+                        <option value="A4.210.297">A4 (210x297 mm)</option>
+                        <option value="A3.297.420">A3 (297x420 mm)</option>
+                        <option value="B5.176.250">B5 (176x250 mm)</option>
+                        <option value="B4.250.353">B4 (250x353 mm)</option>
+                        <option value="JIS-B5.182.257">JIS-B5 (182x257 mm)</option>
+                        <option value="JIS-B4.257.364">JIS-B4 (257x364 mm)</option>
+                        <option value="letter.215.9.279.4" selected>Letter (8.5x11 in)</option>
+                        <option value="legal.215.9.355.6">Legal (8.5x14 in)</option>
+                        <option value="ledger.279.4.431.8">Ledger (11x17 in)</option>
+                    </select>
+
+                    <hr>
+                    <p class="small mb-0 text-muted">
+                        By continuing to use Panther, you confirm that you have read, understood, and agreed to this <a
+                            href="https://github.com/vinhngph/panther/wiki/Disclaimer" class="link-info" target="_blank"
+                            rel="noopener noreferrer">Disclaimer</a>.
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="row gap-3 w-100">
+                        <button type="button" class="col btn btn-outline-secondary">Cancel</button>
+                        <button type="button" class="col btn btn-outline-info" data-ds-dismiss="modal">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./papersize.js"></script>
+</body>
+
+</html>

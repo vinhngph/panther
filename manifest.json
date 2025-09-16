@@ -1,7 +1,7 @@
 {
     "name": "Panther",
     "description": "Enhance your experience on Studocu.",
-    "version": "1.2.1.9",
+    "version": "1.2.2",
     "manifest_version": 3,
     "icons": {
         "16": "src/assets/icon/icon16.png",
@@ -12,7 +12,10 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "src/bundle/viewer.bundle.js"
+                "src/bundle/viewer.bundle.js",
+                "src/assets/bootstrap/bootstrap.min.css",
+                "src/assets/modals/papersize.html",
+                "src/assets/modals/papersize.js"
             ],
             "matches": [
                 "https://www.studocu.com/*",

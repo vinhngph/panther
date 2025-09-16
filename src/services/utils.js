@@ -107,7 +107,7 @@ const scrollToPosition = async (position) => {
     })
 }
 
-const genDoc = async () => {
+const genDoc = async (paperSize) => {
     const docStyles = (
         document.querySelector('link[rel="stylesheet"][href*="doc-assets"][href*=".studocu.com"]') ||
         document.querySelector('link[as="style"][href*="doc-assets"][href*=".studocu.com"]')
@@ -116,7 +116,7 @@ const genDoc = async () => {
     const newWindow = window.open("");
     newWindow.document.title = document.title;
     newWindow.document.head.appendChild(docStyles);
-    newWindow.document.head.appendChild(printConfig());
+    newWindow.document.head.appendChild(printConfig(paperSize));
     newWindow.document.body.appendChild(cloneDoc());
 
     const script = newWindow.document.createElement("script")
@@ -135,7 +135,7 @@ const isClear = () => {
     return matched.length === 0
 }
 
-const printConfig = () => {
+const printConfig = (paperSize) => {
     // Get document size
     const docSize = document.getElementById("page-container-wrapper")?.childNodes[0]?.childNodes[0]?.childNodes[0];
     if (!docSize) return;
@@ -175,23 +175,35 @@ const printConfig = () => {
     // portrait: true | landscape: false
     const docStruct = docWidth < docHeight ? "portrait" : "landscape";
 
+    const parsePaperSize = (paperSize) => {
+        const values = paperSize.split(".")
+        if (values.length === 5) {
+            return [values[0], Number(values[1] + "." + values[2]), Number(values[3] + "." + values[4])]
+        }
+        if (values.length === 3) {
+            return [values[0], Number(values[1]), Number(values[2])]
+        }
+        return null
+    }
+
+    const [sizeIndex, sizeX, sizeY] = parsePaperSize(paperSize)
+
     let docScale;
     let translateX;
     let translateY;
 
     if (docStruct == "portrait") {
-        docScale = Math.min(210 / docWidth, 297 / docHeight);
-        translateX = mmToPx((210 - (docWidth * docScale)) / 2);
-        translateY = mmToPx((297 - (docHeight * docScale)) / 2);
+        docScale = Math.min(sizeX / docWidth, sizeY / docHeight);
+        translateX = mmToPx((sizeX - (docWidth * docScale)) / 2);
+        translateY = mmToPx((sizeY - (docHeight * docScale)) / 2);
     } else {
-        docScale = Math.min(297 / docWidth, 210 / docHeight);
-        translateX = mmToPx((297 - (docWidth * docScale)) / 2);
-        translateY = mmToPx((210 - (docHeight * docScale)) / 2);
+        docScale = Math.min(sizeY / docWidth, sizeX / docHeight);
+        translateX = mmToPx((sizeY - (docWidth * docScale)) / 2);
+        translateY = mmToPx((sizeX - (docHeight * docScale)) / 2);
     }
 
-
     const css = document.createElement("style");
-    css.innerText = `@media print { @page { size: A4 ${docStruct}; margin: 0; } #page-container { transform: scale(${docScale}) translate(${translateX}px, ${translateY}px); transform-origin: top left; }}`;
+    css.innerText = `@media print { @page { size: ${sizeIndex} ${docStruct}; margin: 0; } #page-container { transform: scale(${docScale}) translate(${translateX}px, ${translateY}px); transform-origin: top left; }}`;
     return css;
 }
 
@@ -216,6 +228,46 @@ const cloneDoc = () => {
     return doc;
 }
 
+const choosePaperSize = async () => {
+    return new Promise((resolve) => {
+        const container = document.createElement("iframe")
+        container.src = chrome.runtime.getURL("src/assets/modals/papersize.html")
+        container.style.position = "fixed";
+        container.style.top = "0";
+        container.style.left = "0";
+        container.style.width = "100%";
+        container.style.height = "100%";
+        container.style.pointerEvents = "auto"
+        container.style.zIndex = "9999"
+        container.style.opacity = "0"
+        container.style.transition = "opacity 0.3s ease"
+
+        document.body.appendChild(container)
+        requestAnimationFrame(() => {
+            container.style.opacity = "1"
+        })
+
+        function handler(event) {
+            if (event.source !== container.contentWindow) return
+            if (event.data?.type === "cancelled") {
+                cleanup()
+                resolve(null)
+            }
+            if (event.data?.type === "confirmed") {
+                cleanup()
+                resolve(event.data.value)
+            }
+        }
+
+        function cleanup() {
+            window.removeEventListener("message", handler)
+            container.remove()
+        }
+
+        window.addEventListener("message", handler)
+    })
+}
+
 export async function processDocument() {
     if (!isClear()) {
         if (confirm(`Advertisement banners are detected in this document.\nClick "OK" to remove them and refresh the page.\nClick "Cancel" if you believe all banners have been removed.`)) {
@@ -223,11 +275,15 @@ export async function processDocument() {
         }
     }
 
+    const paperSize = await choosePaperSize()
+    if (!paperSize) return
+
     if (!checkContent()) {
         // If document is not loaded yet
         const currentPosition = getCurrentPosition();
         await scanDocument();
         await scrollToPosition(currentPosition);
     }
-    return genDoc()
+
+    return genDoc(paperSize)
 }
