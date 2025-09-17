@@ -15,37 +15,46 @@
 
 ---
 
-Panther is a lightweight Chrome extension designed to improve the readability and accessibility of educational documents on supported platforms. The extension operates only on content that is already loaded in your browser and does not bypass any authentication, paywalls, or server-side restrictions.
+
+Panther is a lightweight, community-driven Chrome extension designed to improve the readability and accessibility of educational documents on supported platforms.  
+It works only with content that is already visible in your browser and does **not** bypass authentication, paywalls, or server-side restrictions.
 
 ---
 
-## 🚀 Features
-- **Clean Viewing Experience:** Removes distracting overlays and visual obstructions from visible content.
-- **Enhanced Readability:** Improves text formatting for easier reading and text selection.
-- **Local Operation:** Works entirely on content already present on the page—no external data fetching or server-side access.
+## 🚀 Key Feature
+- Export documents you have access to into PDF format.  
 
 ---
 
-## 🧠 Use Cases
-- **Improved Study Experience:** Enhance your reading experience for online study materials.
-- **Offline Reference:** Save the content visible on your browser for personal offline use.
-- **Accessibility:** Make documents easier to read without modifying protected or restricted content.
+## 🔁 How to use
+1. Open any Studocu page that you have legitimate access to.  
+2. Click the Panther icon or **Download** button.  
+3. Download or print the content **for personal use only**.  
+
+---
+
+## ⚠️ Note
+- If banners appear, refresh the page.  
+- If content doesn't show up, close the print popup and try again.  
 
 ---
 
 ## ⚖️ Legal Notice & Disclaimer
 
-**Important:**
+- **Independent Project:** Panther is not affiliated with, endorsed by, or sponsored by Studocu or any educational platform.  
+- **Limited Scope:** The extension only modifies how content already loaded in your browser is displayed. It does **not** unlock or provide access to restricted materials.  
+- **Personal Use Only:** Intended for educational and personal use in compliance with each platform’s Terms of Service.  
+- **User Responsibility:** You are solely responsible for how you use this extension.  
+- **No Warranty:** Provided “as is” without warranties. Use at your own risk.  
 
-- **Independent Project:** Panther is an independent, community-driven project and is not affiliated with, endorsed by, or sponsored by any specific educational platform.
-- **Limited Scope:** The extension only modifies the presentation of content that is already loaded in your browser. It does not bypass any authentication, paywalls, or any form of server-side protection.
-- **User Responsibility:** Users must comply with the terms of service of the platforms they use. This tool is intended solely for educational and personal purposes.
-- **No Warranty:** This project is provided "as is" without any warranties. Use it at your own risk.
+👉 Full [Disclaimer](https://github.com/vinhngph/panther/wiki/Disclaimer)  
 
 ---
 
 ## 🔒 Privacy
-Panther does not collect, store, or transmit any personal data. All operations are performed locally within your browser.
+Panther does not collect, store, or transmit personal data. All operations happen locally in your browser.  
+
+👉 See full [Privacy Policy](https://github.com/vinhngph/panther/wiki/Privacy-Policy)  
 
 ---
 
@@ -72,11 +81,11 @@ Panther does not collect, store, or transmit any personal data. All operations a
 **Q: Is this extension free?**  
 A: Yes, Panther is completely free for personal, educational, and non-commercial use.
 
-**Q: Can Panther be used to access restricted content?**  
-A: No. Panther only enhances the display of content already visible in your browser and does not bypass any access restrictions.
+**Q: Can Panther be used to access restricted or paid content?**  
+A: No. Panther does not bypass any access restrictions.
 
 **Q: Does Panther collect any personal data?**  
-A: No, this extension does not collect or store any personal data.
+A: No. All operations happen locally in your browser.
 
 ---
 
