@@ -30,13 +30,12 @@ export async function scanDocument() {
 
     for (let i = 0; i < elements.length; i++) {
         try {
-            const content = elements[i].childNodes[0]?.childNodes[0];
             elements[i].scrollIntoView({
                 behavior: "instant",
                 block: "start",
             });
             progress.setProgress(i + 1)
-            await waitContent(content);
+            await waitContent(elements[i]);
         } catch (error) {
             alert("Error processing element:", error);
             return;
@@ -137,7 +136,7 @@ const isClear = () => {
 
 const printConfig = (paperSize) => {
     // Get document size
-    const docSize = document.getElementById("page-container-wrapper")?.childNodes[0]?.childNodes[0]?.childNodes[0];
+    const docSize = document.getElementById("page-container-wrapper")?.childNodes[0]?.childNodes[1]?.childNodes[0];
     if (!docSize) return;
 
     // Convert px to mm
@@ -221,6 +220,11 @@ const cloneDoc = () => {
         e.remove();
     });
     doc.childNodes[0].childNodes.forEach((e) => {
+        if (e.childNodes.length == 2) {
+            e.childNodes[1].style = "display: block";
+            e.childNodes[1].childNodes[0].style = "display: block";
+            return;
+        }
         e.childNodes[0].style = "display: block";
         e.childNodes[0].childNodes[0].style = "display: block;";
     });
