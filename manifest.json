@@ -1,7 +1,7 @@
 {
     "name": "Panther",
     "description": "A simple tool to export accessible Studocu pages into PDF.",
-    "version": "1.2.2.3",
+    "version": "1.2.2.4",
     "manifest_version": 3,
     "icons": {
         "16": "src/assets/icon/icon16.png",

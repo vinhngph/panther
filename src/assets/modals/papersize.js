@@ -1,4 +1,4 @@
-document.querySelector("button.btn-outline-secondary").addEventListener("click", (e) => {
+document.querySelector("button.btn-outline-danger").addEventListener("click", (e) => {
     e.preventDefault()
     window.parent.postMessage({ type: "cancelled" }, "*")
 })
